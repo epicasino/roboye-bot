@@ -2,9 +2,25 @@ require("dotenv").config();
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = process.env.TOKEN;
+const token = process.env.TOKEN;
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const { YouTubeExtractor } = require("@discord-player/extractor");
+const { Player } = require("discord-player");
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildVoiceStates,
+  ],
+});
+
+// this is the entrypoint for discord-player based application
+const player = new Player(client);
+
+player.extractors.loadDefault();
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
