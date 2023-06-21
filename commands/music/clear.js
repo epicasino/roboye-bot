@@ -3,28 +3,25 @@ const { useMasterPlayer } = require("discord-player");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('queue')
-    .setDescription('Gets current player queue.'),
+    .setName("clear")
+    .setDescription("Clears current queue"),
   async execute(interaction) {
     const player = useMasterPlayer();
     const queue = player.nodes.get(interaction.guild.members.me);
     const tracks = queue.tracks.toArray();
     const currentTrack = queue.currentTrack;
 
-    if (tracks == '') {
-      return interaction.reply('Queue is Empty!')
-    };
+    if (tracks == "") {
+      return interaction.reply("Queue is Empty!");
+    }
 
     await interaction.deferReply();
 
     try {
-      const tracksMsg = tracks.map(track => `- ${track}`);
-
-      return interaction.followUp(`**Current Track:** ${currentTrack}\n\n **Queue:**\n ${tracksMsg.join('\n')}`);
+      queue.tracks.clear();
+      return interaction.followUp("Queue Cleared!");
     } catch (e) {
       return interaction.followUp(`Error: ${e}`);
     }
-    
-  }
-}
-  // `Current Track: ${queue.currentTrack}`
+  },
+};
