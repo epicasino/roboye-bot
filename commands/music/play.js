@@ -29,7 +29,7 @@ module.exports = {
               requestedBy: interaction.user,
             }, // we can access this metadata object using queue.metadata later on
             selfDeaf: true,
-            volume: 100,
+            volume: 50,
             leaveOnEmpty: true,
             leaveOnEmptyCooldown: 300000,
             leaveOnEnd: true,
