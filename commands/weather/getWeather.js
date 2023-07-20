@@ -9,6 +9,7 @@ module.exports = {
       option
         .setName("location")
         .setDescription("City Name, ZIP Code, Lat. & Lon.")
+        .setRequired(true)
     ),
 
   async execute(interaction) {
