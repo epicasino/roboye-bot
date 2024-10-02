@@ -65,6 +65,8 @@ module.exports = {
             )[0]
         );
 
+      // console.log(gamemodeInfo);
+
       const matchEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(
@@ -129,7 +131,3 @@ module.exports = {
     }
   },
 };
-
-// https://api.henrikdev.xyz/valorant/v4/matches/na/pc/chicacongranculo/vane?api_key=process.env.VAL_TOKEN
-
-// chicacongranculo;
