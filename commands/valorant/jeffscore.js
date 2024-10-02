@@ -36,14 +36,24 @@ module.exports = {
         `https://valorant-api.com/v1/maps/${latestMatch.metadata.map.id}`
       ).then((res) => res.json());
 
+      const gamemodeInfo = await fetch(`https://valorant-api.com/v1/gamemodes`)
+        .then((res) => res.json())
+        .then(
+          (gamemodes) =>
+            gamemodes.data.filter(
+              (gamemode) =>
+                gamemode.displayName === latestMatch.metadata.queue.mode_type
+            )[0]
+        );
+
+      // console.log(gamemodeInfo);
+
       const matchEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(
           `Jeff's Game on ${new Date(
             latestMatch.metadata.started_at
-          ).toLocaleDateString()} at ${new Date(
-            latestMatch.metadata.started_at
-          ).toLocaleTimeString()}`
+          ).toLocaleDateString()}`
         )
         .setURL(
           `https://tracker.gg/valorant/match/${latestMatch.metadata.match_id}`
@@ -86,10 +96,15 @@ module.exports = {
             inline: true,
           }
         )
-        .setImage(`${mapInfo.data.listViewIcon}`);
+        .setImage(`${mapInfo.data.listViewIcon}`)
+        .setFooter({
+          text: `Gamemode: ${latestMatch.metadata.queue.name}`,
+          iconURL: `${gamemodeInfo.displayIcon}`,
+        });
 
       return interaction.followUp({ embeds: [matchEmbed] });
     } catch (e) {
+      console.error(e);
       return interaction.followUp(`Something went wrong: ${e}`);
     }
   },

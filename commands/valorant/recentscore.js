@@ -90,22 +90,22 @@ module.exports = {
           },
           {
             name: `${agentInfo.data.abilities[2].displayName}`,
-            value: `\`${vanessa.ability_casts.grenade}\``,
+            value: `\`${player.ability_casts.grenade}\``,
             inline: true,
           },
           {
             name: `${agentInfo.data.abilities[0].displayName}`,
-            value: `\`${vanessa.ability_casts.ability1}\``,
+            value: `\`${player.ability_casts.ability1}\``,
             inline: true,
           },
           {
             name: `${agentInfo.data.abilities[1].displayName}`,
-            value: `\`${vanessa.ability_casts.ability2}\``,
+            value: `\`${player.ability_casts.ability2}\``,
             inline: true,
           },
           {
             name: `${agentInfo.data.abilities[3].displayName}`,
-            value: `\`${vanessa.ability_casts.ultimate}\``,
+            value: `\`${player.ability_casts.ultimate}\``,
             inline: true,
           }
         )
