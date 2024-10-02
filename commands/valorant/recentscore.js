@@ -23,7 +23,10 @@ module.exports = {
       const playerTag = interaction.options.getString('player_tag', true);
 
       const latestMatch = await fetch(
-        `https://api.henrikdev.xyz/valorant/v4/matches/na/pc/${playerName}/${playerTag}?api_key=${process.env.VAL_TOKEN}`
+        `https://api.henrikdev.xyz/valorant/v4/matches/na/pc/${playerName
+          .trim()
+          .split(' ')
+          .join('%20')}/${playerTag}?api_key=${process.env.VAL_TOKEN}`
       )
         .then((res) => res.json())
         .then((data) => {
