@@ -4,7 +4,7 @@
   "description": "A redone version of the boye bot. Music using discord-player.",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon deploy-commands.js && nodemon index.js",
+    "watch": "node deploy-commands.js && nodemon index.js",
     "start": "node deploy-commands.js && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

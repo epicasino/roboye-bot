@@ -32,6 +32,12 @@ module.exports = {
         `https://valorant-api.com/v1/agents/${vanessa.agent.id}`
       ).then((res) => res.json());
 
+      const mapInfo = await fetch(
+        `https://valorant-api.com/v1/maps/${latestMatch.metadata.map.id}`
+      ).then((res) => res.json());
+
+      // console.log(mapInfo);
+
       const matchEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(
@@ -48,12 +54,45 @@ module.exports = {
         .addFields(
           {
             name: 'Average Combat Score',
-            value: `Vanessa's ACS is **${acs}**`,
+            value: `Vanessa's ACS is **\`${acs}\`**`,
           },
-          { name: 'Kills', value: `${vanessa.stats.kills}`, inline: true },
-          { name: 'Deaths', value: `**${vanessa.stats.deaths}**`, inline: true },
-          { name: 'Assists', value: `${vanessa.stats.assists}`, inline: true }
-        );
+          { name: 'Kills', value: `\`${vanessa.stats.kills}\``, inline: true },
+          {
+            name: 'Deaths',
+            value: `**\`${vanessa.stats.deaths}\`**`,
+            inline: true,
+          },
+          {
+            name: 'Assists',
+            value: `\`${vanessa.stats.assists}\``,
+            inline: true,
+          },
+          {
+            name: '\u200B',
+            value: '**Abilities Used**',
+          },
+          {
+            name: `${agentInfo.data.abilities[2].displayName}`,
+            value: `\`${vanessa.ability_casts.grenade}\``,
+            inline: true,
+          },
+          {
+            name: `${agentInfo.data.abilities[0].displayName}`,
+            value: `\`${vanessa.ability_casts.ability1}\``,
+            inline: true,
+          },
+          {
+            name: `${agentInfo.data.abilities[1].displayName}`,
+            value: `\`${vanessa.ability_casts.ability2}\``,
+            inline: true,
+          },
+          {
+            name: `${agentInfo.data.abilities[3].displayName}`,
+            value: `\`${vanessa.ability_casts.ultimate}\``,
+            inline: true,
+          }
+        )
+        .setImage(`${mapInfo.data.listViewIcon}`);
 
       return interaction.followUp({ embeds: [matchEmbed] });
     } catch (e) {
