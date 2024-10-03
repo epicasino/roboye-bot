@@ -13,7 +13,7 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName('player_tag')
-        .setDescription('Input Player Name')
+        .setDescription('Input Player Tag')
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -21,6 +21,20 @@ module.exports = {
     try {
       const playerName = interaction.options.getString('player_name', true);
       const playerTag = interaction.options.getString('player_tag', true);
+
+      const playerMMR = await fetch(
+        `https://api.henrikdev.xyz/valorant/v3/mmr/na/pc/${playerName}/${playerTag}?api_key=${process.env.VAL_TOKEN}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          return data.data;
+        });
+
+      if (!playerMMR) {
+        throw 'No Matching Player!';
+      }
+
+      // console.log(playerTag);
 
       const latestMatch = await fetch(
         `https://api.henrikdev.xyz/valorant/v4/matches/na/pc/${playerName
@@ -50,6 +64,9 @@ module.exports = {
       const matchLength = latestMatch.rounds.length;
       const acs = Math.floor(player.stats.score / matchLength);
 
+      const teamInfo = latestMatch.teams.find(
+        (team) => team.team_id === player.team_id
+      );
       const agentInfo = await fetch(
         `https://valorant-api.com/v1/agents/${player.agent.id}`
       ).then((res) => res.json());
@@ -60,15 +77,23 @@ module.exports = {
 
       const gamemodeInfo = await fetch(`https://valorant-api.com/v1/gamemodes`)
         .then((res) => res.json())
-        .then(
-          (gamemodes) =>
-            gamemodes.data.filter(
-              (gamemode) =>
-                gamemode.displayName === latestMatch.metadata.queue.mode_type
-            )[0]
+        .then((gamemodes) =>
+          gamemodes.data.find(
+            (gamemode) =>
+              gamemode.displayName === latestMatch.metadata.queue.mode_type
+          )
         );
 
       // console.log(gamemodeInfo);
+
+      // gets the last rank episode in array, unsure if thats right or not butt we'll see about that
+      const ranksInfo = await fetch(
+        `https://valorant-api.com/v1/competitivetiers`
+      )
+        .then((res) => res.json())
+        .then((data) => data.data.pop());
+
+      // console.log(ranksInfo)
 
       const matchEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
@@ -80,6 +105,16 @@ module.exports = {
         .setURL(
           `https://tracker.gg/valorant/match/${latestMatch.metadata.match_id}`
         )
+        .setAuthor({
+          name: `${player.name}#${player.tag} | ${playerMMR.current.tier.name}`,
+          iconURL: ranksInfo.tiers.find(
+            (rank) => rank.tier === playerMMR.current.tier.id
+          ).largeIcon,
+          url: `https://tracker.gg/valorant/profile/riot/${player.name
+            .trim()
+            .split(' ')
+            .join('%20')}%23${player.tag}/overview`,
+        })
         .setThumbnail(agentInfo.data.displayIcon)
         .addFields(
           {

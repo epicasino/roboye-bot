@@ -7,6 +7,18 @@ module.exports = {
   async execute(interaction) {
     interaction.deferReply();
     try {
+      const playerMMR = await fetch(
+        `https://api.henrikdev.xyz/valorant/v3/mmr/na/pc/chicacongranculo/vane?api_key=${process.env.VAL_TOKEN}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          return data.data
+            ? data.data
+            : data.errors[0].status === 404 && {
+                current: { tier: { id: 0, name: 'Unrated' } },
+              };
+        });
+
       const latestMatch = await fetch(
         `https://api.henrikdev.xyz/valorant/v4/matches/na/pc/chicacongranculo/vane?api_key=${process.env.VAL_TOKEN}`
       )
@@ -72,9 +84,10 @@ module.exports = {
           `https://tracker.gg/valorant/match/${latestMatch.metadata.match_id}`
         )
         .setAuthor({
-          name: `${vanessa.name}#${vanessa.tag} | ${vanessa.tier.name}`,
-          iconURL: ranksInfo.tiers.find((rank) => rank.tier === vanessa.tier.id)
-            .largeIcon,
+          name: `${vanessa.name}#${vanessa.tag} | ${playerMMR.current.tier.name}`,
+          iconURL: ranksInfo.tiers.find(
+            (rank) => rank.tier === playerMMR.current.tier.id
+          ).largeIcon,
           url: `https://tracker.gg/valorant/profile/riot/${vanessa.name
             .trim()
             .split(' ')
