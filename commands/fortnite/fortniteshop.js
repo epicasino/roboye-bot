@@ -6,8 +6,6 @@ const {
   ButtonStyle,
 } = require('discord.js');
 
-const sampleShop = require('./sample_fortnite_shop.json');
-
 function bubbleSort(arr, n) {
   let i, j, temp;
   let swapped;
@@ -71,8 +69,8 @@ module.exports = {
           const filteredShop = data.shop.filter((item) => {
             return item.displayType !== 'Music';
           });
-          const sortedShop = bubbleSort(filteredShop, filteredShop.length);
-          const splitShop = splitCategories(sortedShop);
+          // const sortedShop = bubbleSort(filteredShop, filteredShop.length);
+          const splitShop = splitCategories(filteredShop);
           return { date: data.lastUpdate.date, shop: splitShop };
         });
 
@@ -82,7 +80,10 @@ module.exports = {
       fortniteShop.shop.forEach((category) => {
         const parsedItems = category.array.map((item) => {
           // console.log(item);
-          return { name: item.displayName, value: item.displayDescription };
+          return {
+            name: item.displayName,
+            value: item.displayDescription,
+          };
         });
         // console.log(parsedItems.length);
         embededShopItems.push({
@@ -94,6 +95,22 @@ module.exports = {
           fields: parsedItems,
         });
       });
+
+      for (let i = 0; i < embededShopItems.length; i++) {
+        if (embededShopItems[i].fields.length > 25) {
+          // console.log(embededShopItems[i]);
+          let tmp = embededShopItems[i].fields.slice(0, 24);
+          embededShopItems[i].fields.splice(0, 24);
+          embededShopItems.splice(i, 0, {
+            color: 0x0099ff,
+            title: embededShopItems[i].title,
+            description: `Fortnite Shop on ${new Date(
+              fortniteShop.date
+            ).toLocaleDateString()}`,
+            fields: tmp,
+          });
+        }
+      }
 
       const nextButton = new ButtonBuilder()
         .setCustomId('next')
