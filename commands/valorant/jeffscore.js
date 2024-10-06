@@ -90,6 +90,10 @@ module.exports = {
         .setThumbnail(agentInfo.data.displayIcon)
         .addFields(
           {
+            name: `**${teamInfo.won ? 'Won' : 'Lost'} Game**`,
+            value: `**Score:** \`${teamInfo.rounds.won} / ${teamInfo.rounds.lost}\``,
+          },
+          {
             name: 'Average Combat Score',
             value: `${jeff.name} ACS is **\`${acs}\`**`,
           },
