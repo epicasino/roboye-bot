@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
-function neededKills(won, team, rounds) {
-  let neededKills = 0;
-  // to calculate needed kills: in latestMatch.rounds, array of rounds
+function neededKills(won, team, rounds, playerName) {
   if (!won) {
+    let neededKills = 0;
+    // to calculate needed kills: in latestMatch.rounds, array of rounds
     // loop through rounds array, only select rounds where player lost (check with the rounds[i].winning_team property)
     const roundsLost = rounds.filter((round) => {
       return round.winning_team !== team;
@@ -12,23 +12,43 @@ function neededKills(won, team, rounds) {
       const teamPlayers = round.stats.filter((player) => {
         return player.player.team === team;
       });
-      const totalTeamRoundKills = teamPlayers.reduce((accum, curr) => {
-        accum.stats.kill + curr.stats.kills;
-      }, 0);
+      // console.log(teamPlayers.length);
+      const totalTeamRoundKills = teamPlayers.reduce((accum, curr, index) => {
+        if (index === 1) {
+          // console.log(accum.stats.kills + curr.stats.kills);
+          return accum.stats.kills + curr.stats.kills;
+        } else {
+          return accum + curr.stats.kills;
+        }
+      });
 
-      // if team lost in round, but team had 5 total kills, BUT the loss was in result to team elimination, that means someone was res'd, we would subtract 6 by total team kills
-      if (round.result === 'Elimination' && totalTeamRoundKills === 5) {
-        neededKills += 6 - totalTeamRoundKills;
-        // special case, if team loses by elimination, enemy clove ults, gets a pick, then dies, then sage res' her back. subtract by 7 by total team kills
-      } else if (round.result === 'Elimination' && totalTeamRoundKills === 6) {
-        neededKills += 7 - totalTeamRoundKills;
-      } else {
-        neededKills += 5 - totalTeamRoundKills;
+      switch (round.result) {
+        case 'Elimination' || 'Defuse':
+          switch (totalTeamRoundKills) {
+            // if team lost in round by elimination or defuse, but team had 5 total kills that means someone was res'd, we would subtract 6 by total team kills
+            case 5:
+              neededKills += 6 - totalTeamRoundKills;
+              break;
+            // special case, if team loses by elimination or defuse, enemy clove ults gets a pick, then dies, then sage res' her back. subtract by 7 by total team kills
+            case 6:
+              neededKills += 7 - totalTeamRoundKills;
+              break;
+            // else for each round lost, subtract 5 by total team kills
+            default:
+              neededKills += 5 - totalTeamRoundKills;
+          }
+          break;
+        case 'Detonate':
+          // because the bomb detonated, we need to check through end-of-round player locations
+          // check to see remaining alive players after detonation that are not on the user's team
+          const remainingEnemies = round.plant.player_locations.filter(
+            (playerLocation) => playerLocation.player.team !== team
+          ).length;
+          neededKills += remainingEnemies;
       }
     });
-  }
-
-  // else for each round lost, subtract 5 by total team kills
+    return `${playerName} needs ${neededKills} kills to win the match.`;
+  } else return `${playerName} won the match!`;
 }
 
 module.exports = {
@@ -95,13 +115,12 @@ module.exports = {
         },
         fields: [
           {
-            name: `${
-              teamInfo.won
-                ? `${player.name} won the match!`
-                : `${player.name} needed ${
-                    (13 - teamInfo.rounds.won) * 5
-                  } more kills to win the Match.`
-            }`,
+            name: neededKills(
+              teamInfo.won,
+              player.team_id,
+              latestMatch.rounds,
+              player.name
+            ),
             value: '',
           },
         ],
