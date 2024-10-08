@@ -2,7 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('recentscore')
+    .setName('recent-score')
     .setDescription("Returns a player's latest Valorant score.")
     .addStringOption((option) =>
       option
@@ -23,11 +23,15 @@ module.exports = {
       const playerTag = interaction.options.getString('player_tag', true);
 
       const playerMMR = await fetch(
-        `https://api.henrikdev.xyz/valorant/v3/mmr/na/pc/${playerName}/${playerTag}?api_key=${process.env.VAL_TOKEN}`
+        `https://api.henrikdev.xyz/valorant/v3/mmr/na/pc/chicacongranculo/vane?api_key=${process.env.VAL_TOKEN}`
       )
         .then((res) => res.json())
         .then((data) => {
-          return data.data;
+          return data.data
+            ? data.data
+            : data.errors[0].status === 404 && {
+                current: { tier: { id: 0, name: 'Unrated' } },
+              };
         });
 
       if (!playerMMR) {
