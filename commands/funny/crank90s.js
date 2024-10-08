@@ -13,7 +13,7 @@ const gifCollection = [
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('crank90s')
+		.setName('crank-90s')
 		.setDescription('Bot cranks 90s!'),
 	async execute(interaction) {
 		await interaction.reply(gifCollection[Math.floor(Math.random() * gifCollection.length)]);

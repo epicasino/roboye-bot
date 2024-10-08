@@ -2,7 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('divorcepapers')
+    .setName('divorce-papers')
     .setDescription('Whenever someone wants to get a divorce'),
   async execute(interaction) {
     const divorceEmbed = new EmbedBuilder()

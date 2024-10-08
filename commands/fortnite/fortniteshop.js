@@ -50,7 +50,7 @@ function splitCategories(arr) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('fortniteshop')
+    .setName('fortnite-shop')
     .setDescription("Gives you the items in today's fortnite shop."),
   async execute(interaction) {
     // interaction.deferReply();

@@ -17,7 +17,7 @@ const gifCollection = [
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('dontbecracked')
+		.setName('dont-be-cracked')
 		.setDescription('dont be cracked...'),
 	async execute(interaction) {
 		await interaction.reply(gifCollection[Math.floor(Math.random() * gifCollection.length)]);
