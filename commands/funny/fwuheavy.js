@@ -13,9 +13,7 @@ module.exports = {
     .setDescription('I fw u heavy.'),
   async execute(interaction) {
     await interaction.reply(
-      await interaction.reply(
-        slapGifs[Math.floor(Math.random() * slapGifs.length)]
-      )
+      slapGifs[Math.floor(Math.random() * slapGifs.length)]
     );
   },
 };
