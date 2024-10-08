@@ -2,7 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('vanessascore')
+    .setName('vanessa-score')
     .setDescription("Returns Vanessa's latest Valorant score."),
   async execute(interaction) {
     interaction.deferReply();

@@ -126,14 +126,12 @@ module.exports = {
       const nextRow = new ActionRowBuilder().addComponents(nextButton);
       const backRow = new ActionRowBuilder().addComponents(backButton);
 
-      let currentpage = 0;
+      let currentPage = 0;
       // console.log(embededShopItems.length);
       const response = await interaction.reply({
-        embeds: [embededShopItems[currentpage]],
+        embeds: [embededShopItems[currentPage]],
         components: [nextRow],
       });
-
-      const collectorFilter = (i) => i.user.id === interaction.user.id;
 
       const collector = response.createMessageComponentCollector({
         filter: (i) => i.user.id === interaction.user.id,
@@ -143,20 +141,20 @@ module.exports = {
       collector.on('collect', async (i) => {
         if (i.customId === 'next') {
           // console.log('next');
-          currentpage++;
+          currentPage++;
           await i.update({
-            embeds: [embededShopItems[currentpage]],
+            embeds: [embededShopItems[currentPage]],
             components: [
-              currentpage === embededShopItems.length - 1 ? backRow : row,
+              currentPage === embededShopItems.length - 1 ? backRow : row,
             ],
           });
         }
         if (i.customId === 'back') {
           // console.log('back');
-          currentpage--;
+          currentPage--;
           await i.update({
-            embeds: [embededShopItems[currentpage]],
-            components: [currentpage === 0 ? nextRow : row],
+            embeds: [embededShopItems[currentPage]],
+            components: [currentPage === 0 ? nextRow : row],
           });
         }
       });

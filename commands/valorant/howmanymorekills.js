@@ -53,7 +53,7 @@ function neededKills(won, team, rounds, playerName) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('howmanymorekills')
+    .setName('how-many-more-kills')
     .setDescription(
       'How many more kills a player needed to win a Valorant game.'
     )

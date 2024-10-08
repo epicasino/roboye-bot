@@ -2,17 +2,21 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('jeffscore')
+    .setName('jeff-score')
     .setDescription("Returns Jeff's latest Valorant score."),
   async execute(interaction) {
     interaction.deferReply();
     try {
       const playerMMR = await fetch(
-        `https://api.henrikdev.xyz/valorant/v3/mmr/na/pc/JeffTheFri/Crisp?api_key=${process.env.VAL_TOKEN}`
+        `https://api.henrikdev.xyz/valorant/v3/mmr/na/pc/chicacongranculo/vane?api_key=${process.env.VAL_TOKEN}`
       )
         .then((res) => res.json())
         .then((data) => {
-          return data.data;
+          return data.data
+            ? data.data
+            : data.errors[0].status === 404 && {
+                current: { tier: { id: 0, name: 'Unrated' } },
+              };
         });
 
       const latestMatch = await fetch(
