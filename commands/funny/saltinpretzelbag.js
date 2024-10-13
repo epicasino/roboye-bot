@@ -7,7 +7,7 @@ module.exports = {
   async execute(interaction) {
     // gif
     await interaction.reply(
-      'https://cdn.discordapp.com/attachments/902415144670351373/1294499850192424980/eating_the_salt_in_a_pretzel_bag.png?ex=670b3c6e&is=6709eaee&hm=2827225ac30441849fc384e41b547e432b42139b3faa1f975d416cb4d1e34b6a&'
+      'blob:https://imgur.com/cfbe9450-0a82-4928-ad03-f58896fff7c8'
     );
   },
 };

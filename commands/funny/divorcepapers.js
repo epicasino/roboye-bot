@@ -11,9 +11,7 @@ module.exports = {
       .setURL(
         `https://www.dochub.com/fillable-form/32077-california-divorce-papers`
       )
-      .setImage(
-        'https://cdn.discordapp.com/attachments/902415144670351373/1290571147632447530/divorce_papers.png?ex=66fcf18b&is=66fba00b&hm=a5ca7ef8ce3aaa69796a100f39b700361091f518d67e60d39a8aa6660cfd5e34&'
-      );
+      .setImage('https://i.imgur.com/MsS8EML.png');
 
     await interaction.reply({ embeds: [divorceEmbed] });
   },
