@@ -4,9 +4,8 @@
   "description": "A redone version of the boye bot. Music using discord-player.",
   "main": "dist/index.js",
   "scripts": {
-    "watch": "node deploy-commands.js && nodemon index.js",
-    "start": "node dist/deploy-commands.js && node .",
     "dev": "tsx watch src/index.ts",
+    "start": "node .",
     "build": "npx tsc"
   },
   "repository": {

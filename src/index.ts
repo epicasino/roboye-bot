@@ -31,12 +31,6 @@ class BoyeBotApplication {
   }
 
   addClientEventHandlers() {
-    this.client.on(Events.MessageCreate, (message: Message) => {
-      if (message.author.bot) return;
-      const { content } = message;
-      message.reply(`Serenity Bot says: ${content}`);
-    });
-
     this.client.on(Events.ClientReady, (client) => {
       console.log(`${client.user.username} logged in!`);
     });

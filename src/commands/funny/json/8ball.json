@@ -1,0 +1,82 @@
+[
+  {
+    "result": "It is certain.",
+    "color": "0x008000"
+  },
+  {
+    "result": "It is decidedly so.",
+    "color": "0x008000"
+  },
+  {
+    "result": "Without a doubt.",
+    "color": "0x008000"
+  },
+  {
+    "result": "Yes definetely.",
+    "color": "0x008000"
+  },
+  {
+    "result": "You may rely on it.",
+    "color": "0x008000"
+  },
+  {
+    "result": "As I see it, yes.",
+    "color": "0x008000"
+  },
+  {
+    "result": "Most likely.",
+    "color": "0x008000"
+  },
+  {
+    "result": "Outlook good.",
+    "color": "0x008000"
+  },
+  {
+    "result": "Yes.",
+    "color": "0x008000"
+  },
+  {
+    "result": "Signs point to yes.",
+    "color": "0x008000"
+  },
+  {
+    "result": "Reply hazy, try again.",
+    "color": "0xffd700"
+  },
+  {
+    "result": "Ask again later.",
+    "color": "0xffd700"
+  },
+  {
+    "result": "Better not tell you now.",
+    "color": "0xffd700"
+  },
+  {
+    "result": "Cannot predict now.",
+    "color": "0xffd700"
+  },
+  {
+    "result": "Concentrate and ask again.",
+    "color": "0xffd700"
+  },
+  {
+    "result": "Don't count on it.",
+    "color": "0xff0000"
+  },
+  {
+    "result": "My reply is no.",
+    "color": "0xff0000"
+  },
+  {
+    "result": "My sources say no.",
+    "color": "0xff0000"
+  },
+  {
+    "result": "Outlook not so good.",
+    "color": "0xff0000"
+  },
+  {
+    "result": "Very doubtful.",
+    "color": "0xff0000"
+  }
+]

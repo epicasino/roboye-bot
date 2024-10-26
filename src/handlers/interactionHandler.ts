@@ -1,13 +1,13 @@
 import { ChatInputCommandInteraction } from 'discord.js';
 import { iCommand } from '../types/types';
-import { PingCommand } from '../commands/utility/ping';
+import { commandsArr } from './commandsArr';
 
 export class InteractionHandler {
   private commands: iCommand[];
 
   constructor() {
     // we can find a better way of doing this.
-    this.commands = [new PingCommand()];
+    this.commands = commandsArr;
   }
 
   getSlashCommands() {

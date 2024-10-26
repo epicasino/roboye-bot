@@ -6,9 +6,9 @@ import {
 
 import { iCommand } from '../../types/types';
 
-export default class PingCommand implements iCommand {
-  name = 'ping';
-  description = 'Pings the bot';
+export default class BigBastardCommand implements iCommand {
+  name = 'big-bastard';
+  description = 'A Big Bastard';
   slashCommandConfig = new SlashCommandBuilder()
     .setName(this.name)
     .setDescription(this.description);
@@ -16,6 +16,6 @@ export default class PingCommand implements iCommand {
   async execute(
     interaction: ChatInputCommandInteraction<CacheType>
   ): Promise<any> {
-    return interaction.reply('Pong!');
+    await interaction.reply('https://i.imgur.com/tpq5Lc2.gif');
   }
 }
