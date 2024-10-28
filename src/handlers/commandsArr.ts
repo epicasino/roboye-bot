@@ -15,10 +15,10 @@ import { iCommand } from '../types/types';
 import SaltInAPretzelBagCommand from '../commands/funny/saltinapretzelbag';
 import ShowerCommand from '../commands/funny/shower';
 import WithThisTreasureCommand from '../commands/funny/withthistreasure';
+import ShortenLinkCommand from '../commands/utility/shortenLink';
 
 // we can find a better way of doing this.
 export const commandsArr: iCommand[] = [
-  new PingCommand(),
   new SixEggCommand(),
   new EightBallCommand(),
   new BigBastardCommand(),
@@ -34,4 +34,6 @@ export const commandsArr: iCommand[] = [
   new SaltInAPretzelBagCommand(),
   new ShowerCommand(),
   new WithThisTreasureCommand(),
+  new PingCommand(),
+  new ShortenLinkCommand(),
 ];
