@@ -12,8 +12,13 @@ class EightBallCommand implements iCommand {
   description = 'Shake the 8 ball to decide your fate.';
   slashCommandConfig = new SlashCommandBuilder()
     .setName(this.name)
-    .setDescription(this.description);
-
+    .setDescription(this.description)
+    .addStringOption((option) =>
+      option
+        .setName('question')
+        .setDescription('Your question to ask the 8 ball')
+        .setRequired(true)
+    );
   async execute(
     interaction: ChatInputCommandInteraction<CacheType>
   ): Promise<any> {
