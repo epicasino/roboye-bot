@@ -7,6 +7,7 @@ import {
 } from 'discord.js';
 import { iCommand } from '../../types/types';
 import { FortniteShopInfo, ShopEntity } from './types/fortniteShopInfoTypes';
+import 'dotenv/config';
 
 function splitCategories(arr: ShopEntity[]) {
   let tmpArr = [];
@@ -153,3 +154,5 @@ class FortniteShopCommand implements iCommand {
     }
   }
 }
+
+export default new FortniteShopCommand();

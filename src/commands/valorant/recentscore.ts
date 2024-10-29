@@ -10,6 +10,7 @@ import { AgentInfo } from './types/agentInfoTypes';
 import { MapInfo } from './types/mapInfoTypes';
 import { GamemodeInfo } from './types/gamemodeInfoTypes';
 import { RanksInfo } from './types/ranksInfoTypes';
+import 'dotenv/config';
 
 class RecentScoreCommand implements iCommand {
   name = 'recent-score';

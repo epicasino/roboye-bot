@@ -6,11 +6,11 @@ import {
   ChatInputCommandInteraction,
 } from 'discord.js';
 import { iCommand } from '../../types/types';
-import 'dotenv/config';
 import { RankMMRInfo } from './types/rankMMRInfoTypes';
 import { ValorantMatchDataEntity, ValorantMatch } from './types/valMatchTypes';
 import { RanksInfo, RanksInfoDataEntity } from './types/ranksInfoTypes';
 import { GamemodeInfo } from './types/gamemodeInfoTypes';
+import 'dotenv/config';
 
 async function generateEmbed(
   match: ValorantMatchDataEntity,

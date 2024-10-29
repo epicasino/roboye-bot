@@ -4,12 +4,12 @@ import {
   ChatInputCommandInteraction,
 } from 'discord.js';
 import { iCommand } from '../../types/types';
-import 'dotenv/config';
-import { DataEntity } from './types/valMatchTypes';
 import { MapInfo } from './types/mapInfoTypes';
 import { AgentInfo } from './types/agentInfoTypes';
 import { GamemodeInfo } from './types/gamemodeInfoTypes';
 import { RanksInfo } from './types/ranksInfoTypes';
+import { ValorantMatch } from './types/valMatchTypes';
+import 'dotenv/config';
 
 class JeffScoreCommand implements iCommand {
   name = 'jeff-score';
@@ -33,11 +33,11 @@ class JeffScoreCommand implements iCommand {
               };
         });
 
-      const latestMatch: DataEntity = await fetch(
+      const latestMatch = await fetch(
         `https://api.henrikdev.xyz/valorant/v4/matches/na/pc/JeffTheFri/Crisp?api_key=${process.env.VAL_TOKEN}`
       )
         .then((res) => res.json())
-        .then((data) => {
+        .then((data: ValorantMatch) => {
           if (data.status === 200) {
             return data.data[0];
           } else throw `Error code ${data.status}`;

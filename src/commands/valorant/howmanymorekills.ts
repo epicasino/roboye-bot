@@ -1,8 +1,8 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js';
-import { DataEntity, RoundsEntity } from './types/valMatchTypes';
+import { RoundsEntity, ValorantMatch } from './types/valMatchTypes';
 import { iCommand } from '../../types/types';
-import 'dotenv/config';
 import { AgentInfo } from './types/agentInfoTypes';
+import 'dotenv/config';
 
 function neededKills(
   won: boolean,
@@ -94,14 +94,14 @@ class HowManyMoreKillsCommand implements iCommand {
       const playerName = interaction.options.getString('player_name', true);
       const playerTag = interaction.options.getString('player_tag', true);
 
-      const latestMatch: DataEntity = await fetch(
+      const latestMatch = await fetch(
         `https://api.henrikdev.xyz/valorant/v4/matches/na/pc/${playerName
           .trim()
           .split(' ')
           .join('%20')}/${playerTag}?api_key=${process.env.VAL_TOKEN}`
       )
         .then((res) => res.json())
-        .then((data) => {
+        .then((data: ValorantMatch) => {
           if (data.status === 200) {
             return data.data[0];
           } else throw `Error code ${data.status}`;
