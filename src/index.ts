@@ -1,10 +1,9 @@
 import 'dotenv/config';
+import express from 'express';
 import {
   Client,
-  Collection,
   Events,
   GatewayIntentBits,
-  Message,
   REST as DiscordRestClient,
   Routes,
   ChatInputCommandInteraction,
@@ -75,3 +74,11 @@ class BoyeBotApplication {
 
 const app = new BoyeBotApplication();
 app.startBot();
+
+// express stuff for render
+const expressApp = express();
+const PORT = process.env.PORT || 3001;
+
+expressApp.listen(PORT, () => {
+  console.log('Express Server up, listening to port' + PORT);
+});
