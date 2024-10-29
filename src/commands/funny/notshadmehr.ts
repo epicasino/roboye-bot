@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class NotShadmehrCommand implements iCommand {
+class NotShadmehrCommand implements iCommand {
   name = 'not-shadmehr';
   description = `How I sleep at night knowing I'm not shadmehr`;
   slashCommandConfig = new SlashCommandBuilder()
@@ -11,3 +11,5 @@ export default class NotShadmehrCommand implements iCommand {
     await interaction.reply('https://i.imgur.com/SEFYqSO.png');
   }
 }
+
+export default new NotShadmehrCommand();

@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class CriminalCommand implements iCommand {
+class CriminalCommand implements iCommand {
   name = 'i-heard-u-a-pdf-file';
   description = 'criminal activity';
   slashCommandConfig = new SlashCommandBuilder()
@@ -13,3 +13,5 @@ export default class CriminalCommand implements iCommand {
     );
   }
 }
+
+export default new CriminalCommand();

@@ -1,10 +1,16 @@
-import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from "discord.js";
-import { iCommand } from "../../types/types";
+import {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  ChatInputCommandInteraction,
+} from 'discord.js';
+import { iCommand } from '../../types/types';
 
-export default class DivorcePapersCommand implements iCommand {
+class DivorcePapersCommand implements iCommand {
   name = 'divorce-papers';
   description = 'Whenever someone wants to get a divorce';
-  slashCommandConfig = new SlashCommandBuilder().setName(this.name).setDescription(this.description)
+  slashCommandConfig = new SlashCommandBuilder()
+    .setName(this.name)
+    .setDescription(this.description);
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
     const divorceEmbed = new EmbedBuilder()
       .setColor(0x0099ff)
@@ -17,3 +23,5 @@ export default class DivorcePapersCommand implements iCommand {
     await interaction.reply({ embeds: [divorceEmbed] });
   }
 }
+
+export default new DivorcePapersCommand();

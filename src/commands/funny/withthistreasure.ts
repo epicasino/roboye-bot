@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class WithThisTreasureCommand implements iCommand {
+class WithThisTreasureCommand implements iCommand {
   name = 'with-this-treasure';
   description = `I Summon...`;
   slashCommandConfig = new SlashCommandBuilder()
@@ -13,3 +13,5 @@ export default class WithThisTreasureCommand implements iCommand {
     );
   }
 }
+
+export default new WithThisTreasureCommand();

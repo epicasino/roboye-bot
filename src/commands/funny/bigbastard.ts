@@ -6,7 +6,7 @@ import {
 
 import { iCommand } from '../../types/types';
 
-export default class BigBastardCommand implements iCommand {
+class BigBastardCommand implements iCommand {
   name = 'big-bastard';
   description = 'A Big Bastard';
   slashCommandConfig = new SlashCommandBuilder()
@@ -19,3 +19,5 @@ export default class BigBastardCommand implements iCommand {
     await interaction.reply('https://i.imgur.com/tpq5Lc2.gif');
   }
 }
+
+export default new BigBastardCommand();

@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class ShowerCommand implements iCommand {
+class ShowerCommand implements iCommand {
   name = 'shower';
   description = `take a shower`;
   slashCommandConfig = new SlashCommandBuilder()
@@ -13,3 +13,5 @@ export default class ShowerCommand implements iCommand {
     );
   }
 }
+
+export default new ShowerCommand();

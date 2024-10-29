@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class KickTheCheaterCommand implements iCommand {
+class KickTheCheaterCommand implements iCommand {
   name = 'kick-the-cheater';
   description = 'KICK THE CHEATER MASTER YAMBO';
   slashCommandConfig = new SlashCommandBuilder()
@@ -14,3 +14,5 @@ export default class KickTheCheaterCommand implements iCommand {
     );
   }
 }
+
+export default new KickTheCheaterCommand();

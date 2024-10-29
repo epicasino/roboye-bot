@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class InYourFaceCommand implements iCommand {
+class InYourFaceCommand implements iCommand {
   name = 'in-your-face';
   description = 'In Your Face. In Your Face.';
   slashCommandConfig = new SlashCommandBuilder()
@@ -14,3 +14,5 @@ export default class InYourFaceCommand implements iCommand {
     );
   }
 }
+
+export default new InYourFaceCommand();

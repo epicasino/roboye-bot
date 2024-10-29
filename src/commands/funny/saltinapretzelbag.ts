@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class SaltInAPretzelBagCommand implements iCommand {
+class SaltInAPretzelBagCommand implements iCommand {
   name = 'salt-in-a-pretzel-bag';
   description = `eating the salt in a pretzel bag`;
   slashCommandConfig = new SlashCommandBuilder()
@@ -13,3 +13,5 @@ export default class SaltInAPretzelBagCommand implements iCommand {
     );
   }
 }
+
+export default new SaltInAPretzelBagCommand();

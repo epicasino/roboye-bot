@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import phoenixWright from './json/phoenixwright.json';
 import { iCommand } from '../../types/types';
 
-export default class PhoenixWrightCommand implements iCommand {
+class PhoenixWrightCommand implements iCommand {
   name = 'phoenix-wright';
   description = 'Phoenix wright showing you papers.';
   slashCommandConfig = new SlashCommandBuilder()
@@ -29,3 +29,5 @@ export default class PhoenixWrightCommand implements iCommand {
     await interaction.reply(gifName.url);
   }
 }
+
+export default new PhoenixWrightCommand();

@@ -6,7 +6,7 @@ import {
 import { iCommand } from '../../types/types';
 import 'dotenv/config';
 
-export default class ShortenLinkCommand implements iCommand {
+class ShortenLinkCommand implements iCommand {
   name = 'shorten-link';
   description = 'Shorten Long Links';
   slashCommandConfig = new SlashCommandBuilder()
@@ -54,3 +54,5 @@ export default class ShortenLinkCommand implements iCommand {
     }
   }
 }
+
+export default new ShortenLinkCommand();

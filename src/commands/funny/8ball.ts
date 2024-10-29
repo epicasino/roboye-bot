@@ -7,7 +7,7 @@ import {
 import eightballJSON from './json/8ball.json';
 import { iCommand } from '../../types/types';
 
-export default class EightBallCommand implements iCommand {
+class EightBallCommand implements iCommand {
   name = '8-ball';
   description = 'Shake the 8 ball to decide your fate.';
   slashCommandConfig = new SlashCommandBuilder()
@@ -38,3 +38,5 @@ export default class EightBallCommand implements iCommand {
     await interaction.reply({ embeds: [eightBallEmbed] });
   }
 }
+
+export default new EightBallCommand();

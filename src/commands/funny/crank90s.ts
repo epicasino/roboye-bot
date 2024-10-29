@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import crank90s from './json/crank90s.json';
 import { iCommand } from '../../types/types';
 
-export default class Crank90sCommand implements iCommand {
+class Crank90sCommand implements iCommand {
   name = 'crank-90s';
   description = 'Bot Cranks 90s!';
   slashCommandConfig = new SlashCommandBuilder()
@@ -27,3 +27,5 @@ export default class Crank90sCommand implements iCommand {
     await interaction.reply(gifName.url);
   }
 }
+
+export default new Crank90sCommand();

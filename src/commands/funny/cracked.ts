@@ -4,7 +4,7 @@ import crackedJSON from './json/cracked.json';
 
 import { iCommand } from '../../types/types';
 
-export default class CrackedCommand implements iCommand {
+class CrackedCommand implements iCommand {
   name = 'dont-be-cracked';
   description = 'dont be cracked...';
   slashCommandConfig = new SlashCommandBuilder()
@@ -30,3 +30,5 @@ export default class CrackedCommand implements iCommand {
     await interaction.reply(gifName.url);
   }
 }
+
+export default new CrackedCommand();

@@ -5,7 +5,7 @@ import {
 } from 'discord.js';
 import { iCommand } from '../../types/types';
 
-export default class SixEggCommand implements iCommand {
+class SixEggCommand implements iCommand {
   name = '6-bomboclatt-egg';
   description = '6 Bomboclatt Egg!';
   slashCommandConfig = new SlashCommandBuilder()
@@ -20,3 +20,5 @@ export default class SixEggCommand implements iCommand {
     );
   }
 }
+
+export default new SixEggCommand();

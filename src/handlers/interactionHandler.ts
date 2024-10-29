@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction } from 'discord.js';
 import { iCommand } from '../types/types';
-import { commandsArr } from './commandsArr';
+import commandsArr from './commandsArr';
 
 export class InteractionHandler {
   private commands: iCommand[];

@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { iCommand } from '../../types/types';
 import fwuHeavy from './json/fwuheavy.json';
 
-export default class IFwUHeavyCommand implements iCommand {
+class IFwUHeavyCommand implements iCommand {
   name = 'i-fw-u-heavy';
   description = 'I fw u heavy.';
   slashCommandConfig = new SlashCommandBuilder()
@@ -27,3 +27,5 @@ export default class IFwUHeavyCommand implements iCommand {
     await interaction.reply(gifName.url);
   }
 }
+
+export default new IFwUHeavyCommand();

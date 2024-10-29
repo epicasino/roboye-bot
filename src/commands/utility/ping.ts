@@ -6,7 +6,7 @@ import {
 
 import { iCommand } from '../../types/types';
 
-export default class PingCommand implements iCommand {
+class PingCommand implements iCommand {
   name = 'ping';
   description = 'Pings the bot';
   slashCommandConfig = new SlashCommandBuilder()
@@ -19,3 +19,5 @@ export default class PingCommand implements iCommand {
     return interaction.reply('Pong!');
   }
 }
+
+export default new PingCommand();
