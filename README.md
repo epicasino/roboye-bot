@@ -10,7 +10,7 @@
 - Can be deployed as a web service on platforms such as Render, Heroku, etc.
 - Features commands for tracking Valorant matches, Fortnite shops, a link shortener command, and fun commands like the magical 8 ball!
 
-## Table of Contents (Optional)
+## Table of Contents
 
 - [Installation](#installation)
 - [Credits](#credits)
