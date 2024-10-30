@@ -80,5 +80,5 @@ const expressApp = express();
 const PORT = process.env.PORT || 3001;
 
 expressApp.listen(PORT, () => {
-  console.log('Express Server up, listening to port' + PORT);
+  console.log('Express Server up, listening to port ' + PORT);
 });
