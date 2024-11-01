@@ -79,6 +79,10 @@ app.startBot();
 const expressApp = express();
 const PORT = process.env.PORT || 3001;
 
+expressApp.get('*', (req, res) => {
+  res.send({ message: 'Hello!' });
+});
+
 expressApp.listen(PORT, () => {
   console.log('Express Server up, listening to port ' + PORT);
 });
