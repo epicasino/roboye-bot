@@ -19,6 +19,8 @@ export class InteractionHandler {
   async handleInteraction(
     interaction: ChatInputCommandInteraction
   ): Promise<void> {
+    if (!interaction.isChatInputCommand()) return;
+
     const commandName = interaction.commandName;
 
     const matchedCommand = this.commands.find(
