@@ -8,6 +8,48 @@ import {
 import { load } from 'cheerio';
 import { iCommand } from '../../types/types';
 
+// current fetch to methstreams is being blocked by cloudflare -> pseudo-code to alternate solution
+// fetch schedule from espn.com/nba/schedule
+// initiate cheerio by loading html from espn
+// $('ScheduleTables) to get all schedule tables
+//    ^ filter $('Table__Title) to get the current day's schedule by date
+//    ^ new Date().toLocaleDateString('en-US', {weekday: 'long', year: 'numeric',  month: 'long', day: 'numeric',})
+// after we get correct class for the date, we use cheerio $('Table__TR') to get all table rows.
+// for each table row, $('td') to get all text (OR: just get Table__Team to get all teams, date__col to get time.)
+//    ^ with each piece of text, parse to make an object:
+//      ^ {vs: string; combination of both teams,
+//         time: string,
+//         link: string; get the abv. of the team, turn into usable links to mstreams
+//        }
+
+// v1 code for mstreams html fetch:
+// const websiteHTML = await fetch('https://methstreams.com/nba/live/12/', {
+//   credentials: 'include',
+// }).then((res) => res.text());
+// // console.log(websiteHTML);
+// const $ = load(websiteHTML);
+// const nbaLinks = $('.btn.btn-default.btn-lg.btn-block')
+//   .map((i, element) => {
+//     // console.log(i);
+//     // removes wnba link, maybe add wnba command later
+//     if (i === 0) return;
+//     const textInfo = $(element)
+//       .text()
+//       .split('\n')
+//       .filter((text) => {
+//         return text.trim().length > 1;
+//       })
+//       .map((text) => {
+//         return text.trim();
+//       });
+//     return {
+//       vs: textInfo[0],
+//       time: textInfo[1],
+//       link: $(element).attr('href').trim(),
+//     };
+//   })
+//   .toArray();
+
 class BasketballGamesCommand implements iCommand {
   name = 'basketball-games';
   description = "Get's stream links for Today's Basketball Games.";
