@@ -15,7 +15,6 @@ class BasketballGamesCommand implements iCommand {
     .setName(this.name)
     .setDescription(this.description);
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
-    interaction.deferReply();
     try {
       const websiteHTML = await fetch(
         'https://methstreams.com/nba/live/12/'
@@ -110,7 +109,7 @@ class BasketballGamesCommand implements iCommand {
           });
 
           let currentPage = 0;
-          const response = await interaction.followUp({
+          const response = await interaction.reply({
             embeds: [nbaEmbeds[currentPage]],
             components: [nextRow],
           });
@@ -166,7 +165,7 @@ class BasketballGamesCommand implements iCommand {
       }
     } catch (error) {
       console.error(error);
-      await interaction.followUp(`Error: ${error}`);
+      await interaction.reply(`Error: ${error}`);
     }
   }
 }
