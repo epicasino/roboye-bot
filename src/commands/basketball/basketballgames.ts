@@ -7,6 +7,8 @@ import {
 } from 'discord.js';
 import { load } from 'cheerio';
 import { iCommand } from '../../types/types';
+// possibly fix json file based on teams names on mstream link
+import basketballTeams from './json/teams.json';
 
 class BasketballGamesCommand implements iCommand {
   name = 'basketball-games';
@@ -16,36 +18,55 @@ class BasketballGamesCommand implements iCommand {
     .setDescription(this.description);
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
     try {
-      const websiteHTML = await fetch('https://methstreams.com/nba/live/12/', {
-        credentials: 'include',
-      }).then((res) => res.text());
+      const websiteHTML = await fetch('https://www.espn.com/nba/schedule').then(
+        (res) => res.text()
+      );
       // console.log(websiteHTML);
       const $ = load(websiteHTML);
-      const nbaLinks = $('.btn.btn-default.btn-lg.btn-block')
+      // gets all schedule tables from website
+      const currentSchedule = $('.ScheduleTables').first();
+      // .toArray();
+      // console.log($(currentSchedule).text());
+      const currentDate = $(currentSchedule)
+        .children()
+        .children('.Table__Title')
+        .text();
+      // console.log(currentDate);
+      const scheduleRows = $(currentSchedule)
+        .find('tbody')
+        .find('tr')
         .map((i, element) => {
-          // console.log(i);
-          // removes wnba link, maybe add wnba command later
-          if (i === 0) return;
-          const textInfo = $(element)
-            .text()
-            .split('\n')
-            .filter((text) => {
-              return text.trim().length > 1;
+          const awayTeam = basketballTeams.find((team) => {
+            return team.location === $(element).find('.events__col').text();
+          });
+          console.log({ away_team: awayTeam });
+          const homeTeam = basketballTeams.find((team) => {
+            return (
+              team.location ===
+              $(element).find('.colspan__col').find('.Table__Team').text()
+            );
+          });
+          console.log({ home_team: homeTeam });
+          const time = $(element).find('.date__col').text();
+          // console.log(time);
+          const link = `https://methstreams.com/nba-streams/${basketballTeams
+            .find((team) => {
+              return team.location === awayTeam.location;
             })
-            .map((text) => {
-              return text.trim();
-            });
+            .teamName.toLowerCase()}`;
+          // console.log(link);
           return {
-            vs: textInfo[0],
-            time: textInfo[1],
-            link: $(element).attr('href').trim(),
+            vs: `${awayTeam.location + ' ' + awayTeam.teamName} vs. ${
+              homeTeam.location + ' ' + homeTeam.teamName
+            }`,
+            time,
+            link,
           };
         })
         .toArray();
-      // console.log(nbaLinks);
-      const nbaFields = nbaLinks.map((link) => {
+      const nbaFields = scheduleRows.map((link) => {
         return {
-          name: link.time,
+          name: link.time + ' ' + '(PST)',
           value: `[${link.vs}](${link.link})`,
         };
       });
@@ -84,7 +105,13 @@ class BasketballGamesCommand implements iCommand {
         const nbaEmbeds = splitNbaFields.map((fieldsArr, i) => {
           return {
             color: 0x0099ff,
-            title: `Current/Upcoming Games on ${new Date().toLocaleDateString()}`,
+            title: `Current/Upcoming Games on ${new Date(
+              currentDate
+            ).toLocaleDateString('us-en', {
+              month: 'numeric',
+              day: 'numeric',
+              year: 'numeric',
+            })}`,
             url: 'https://methstreams.com/nba/live/12/',
             author: {
               name: 'Click for Current NBA Standings (ESPN)',
@@ -139,7 +166,13 @@ class BasketballGamesCommand implements iCommand {
       } else {
         const embed = {
           color: 0x0099ff,
-          title: `Current/Upcoming Games on ${new Date().toLocaleDateString()}`,
+          title: `Current/Upcoming Games on ${new Date(
+            currentDate
+          ).toLocaleDateString('us-en', {
+            month: 'numeric',
+            day: 'numeric',
+            year: 'numeric',
+          })}`,
           url: 'https://methstreams.com/nba/live/12/',
           author: {
             name: 'Click for Current NBA Standings (ESPN)',
@@ -167,3 +200,31 @@ class BasketballGamesCommand implements iCommand {
 }
 
 export default new BasketballGamesCommand();
+
+// v1 code for mstreams html fetch:
+// const websiteHTML = await fetch('https://methstreams.com/nba/live/12/', {
+//   credentials: 'include',
+// }).then((res) => res.text());
+// // console.log(websiteHTML);
+// const $ = load(websiteHTML);
+// const nbaLinks = $('.btn.btn-default.btn-lg.btn-block')
+//   .map((i, element) => {
+//     // console.log(i);
+//     // removes wnba link, maybe add wnba command later
+//     if (i === 0) return;
+//     const textInfo = $(element)
+//       .text()
+//       .split('\n')
+//       .filter((text) => {
+//         return text.trim().length > 1;
+//       })
+//       .map((text) => {
+//         return text.trim();
+//       });
+//     return {
+//       vs: textInfo[0],
+//       time: textInfo[1],
+//       link: $(element).attr('href').trim(),
+//     };
+//   })
+//   .toArray();
