@@ -19,6 +19,7 @@ class BasketballGamesCommand implements iCommand {
       const websiteHTML = await fetch(
         'https://methstreams.com/nba/live/12/'
       ).then((res) => res.text());
+      console.log(websiteHTML);
       // console.log(websiteHTML);
       const $ = load(websiteHTML);
       const nbaLinks = $('.btn.btn-default.btn-lg.btn-block')
