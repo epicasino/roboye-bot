@@ -17,7 +17,7 @@ class BasketballGamesCommand implements iCommand {
     .setName(this.name)
     .setDescription(this.description);
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
-    interaction.deferReply();
+    await interaction.deferReply();
     try {
       const websiteHTML = await fetch('https://www.espn.com/nba/schedule').then(
         (res) => res.text()
@@ -89,7 +89,7 @@ class BasketballGamesCommand implements iCommand {
         backButton
       );
 
-      console.log(nbaFields);
+      // console.log(nbaFields);
 
       if (nbaFields.length > 10) {
         const splitNbaFields: Array<
