@@ -16,9 +16,9 @@ class BasketballGamesCommand implements iCommand {
     .setDescription(this.description);
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
     try {
-      const websiteHTML = await fetch(
-        'https://methstreams.com/nba/live/12/'
-      ).then((res) => res.text());
+      const websiteHTML = await fetch('https://methstreams.com/nba/live/12/', {
+        credentials: 'include',
+      }).then((res) => res.text());
       console.log(websiteHTML);
       // console.log(websiteHTML);
       const $ = load(websiteHTML);
