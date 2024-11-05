@@ -17,6 +17,7 @@ class BasketballGamesCommand implements iCommand {
     .setName(this.name)
     .setDescription(this.description);
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {
+    interaction.deferReply();
     try {
       const websiteHTML = await fetch('https://www.espn.com/nba/schedule').then(
         (res) => res.text()
@@ -39,14 +40,14 @@ class BasketballGamesCommand implements iCommand {
           const awayTeam = basketballTeams.find((team) => {
             return team.location === $(element).find('.events__col').text();
           });
-          console.log({ away_team: awayTeam });
+          // console.log({ away_team: awayTeam });
           const homeTeam = basketballTeams.find((team) => {
             return (
               team.location ===
               $(element).find('.colspan__col').find('.Table__Team').text()
             );
           });
-          console.log({ home_team: homeTeam });
+          // console.log({ home_team: homeTeam });
           const time = $(element).find('.date__col').text();
           // console.log(time);
           const link = `https://methstreams.com/nba-streams/${basketballTeams
@@ -88,7 +89,7 @@ class BasketballGamesCommand implements iCommand {
         backButton
       );
 
-      // console.log(nbaFields);
+      console.log(nbaFields);
 
       if (nbaFields.length > 10) {
         const splitNbaFields: Array<
@@ -135,7 +136,7 @@ class BasketballGamesCommand implements iCommand {
         });
 
         let currentPage = 0;
-        const response = await interaction.reply({
+        const response = await interaction.followUp({
           embeds: [nbaEmbeds[currentPage]],
           components: [nextRow],
         });
@@ -190,11 +191,11 @@ class BasketballGamesCommand implements iCommand {
             })
           ),
         };
-        await interaction.reply({ embeds: [embed] });
+        await interaction.followUp({ embeds: [embed] });
       }
     } catch (error) {
       console.error(error);
-      await interaction.reply(`Error: ${error}`);
+      await interaction.followUp(`Error: ${error}`);
     }
   }
 }
