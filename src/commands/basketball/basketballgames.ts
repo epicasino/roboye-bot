@@ -71,77 +71,72 @@ class BasketballGamesCommand implements iCommand {
       // console.log(nbaFields);
 
       if (nbaFields.length > 10) {
-        try {
-          const splitNbaFields: Array<
-            {
-              name: string;
-              value: string;
-            }[]
-          > = [];
-          const halfArrLength = Math.ceil(nbaFields.length / 2);
+        const splitNbaFields: Array<
+          {
+            name: string;
+            value: string;
+          }[]
+        > = [];
+        const halfArrLength = Math.ceil(nbaFields.length / 2);
 
-          splitNbaFields.push(nbaFields.slice(0, halfArrLength));
-          splitNbaFields.push(nbaFields.slice(halfArrLength, nbaFields.length));
+        splitNbaFields.push(nbaFields.slice(0, halfArrLength));
+        splitNbaFields.push(nbaFields.slice(halfArrLength, nbaFields.length));
 
-          const nbaEmbeds = splitNbaFields.map((fieldsArr, i) => {
-            return {
-              color: 0x0099ff,
-              title: `Current/Upcoming Games on ${new Date().toLocaleDateString()}`,
-              url: 'https://methstreams.com/nba/live/12/',
-              author: {
-                name: 'Click for Current NBA Standings (ESPN)',
-                icon_url: 'https://cdn-icons-png.flaticon.com/512/54/54366.png',
-                url: 'https://www.espn.com/nba/standings',
-              },
-              thumbnail: {
-                url: 'https://methstreams.com/icons/nba.png',
-              },
-              fields: [{ name: '\u200B', value: '' }].concat(
-                fieldsArr.flatMap((obj, index, arr) => {
-                  return arr.length - 1 !== index
-                    ? [obj, { name: '\u200B', value: '' }]
-                    : obj;
-                })
-              ),
-              footer: {
-                text: `Page: ${i + 1}`,
-              },
-            };
-          });
+        const nbaEmbeds = splitNbaFields.map((fieldsArr, i) => {
+          return {
+            color: 0x0099ff,
+            title: `Current/Upcoming Games on ${new Date().toLocaleDateString()}`,
+            url: 'https://methstreams.com/nba/live/12/',
+            author: {
+              name: 'Click for Current NBA Standings (ESPN)',
+              icon_url: 'https://cdn-icons-png.flaticon.com/512/54/54366.png',
+              url: 'https://www.espn.com/nba/standings',
+            },
+            thumbnail: {
+              url: 'https://methstreams.com/icons/nba.png',
+            },
+            fields: [{ name: '\u200B', value: '' }].concat(
+              fieldsArr.flatMap((obj, index, arr) => {
+                return arr.length - 1 !== index
+                  ? [obj, { name: '\u200B', value: '' }]
+                  : obj;
+              })
+            ),
+            footer: {
+              text: `Page: ${i + 1}`,
+            },
+          };
+        });
 
-          let currentPage = 0;
-          const response = await interaction.followUp({
-            embeds: [nbaEmbeds[currentPage]],
-            components: [nextRow],
-          });
+        let currentPage = 0;
+        const response = await interaction.followUp({
+          embeds: [nbaEmbeds[currentPage]],
+          components: [nextRow],
+        });
 
-          const collector = response.createMessageComponentCollector({
-            filter: (i) => i.user.id === interaction.user.id,
-            time: 60_000,
-          });
+        const collector = response.createMessageComponentCollector({
+          filter: (i) => i.user.id === interaction.user.id,
+          time: 60_000,
+        });
 
-          collector.on('collect', async (i) => {
-            if (i.customId === 'next') {
-              currentPage++;
-              // console.log(nbaEmbeds[currentPage]);
-              await i.update({
-                embeds: [nbaEmbeds[currentPage]],
-                components: [backRow],
-              });
-            }
-            if (i.customId === 'back') {
-              // console.log('back');
-              currentPage--;
-              await i.update({
-                embeds: [nbaEmbeds[currentPage]],
-                components: [nextRow],
-              });
-            }
-          });
-        } catch (error) {
-          console.error(error);
-          await interaction.followUp(`Error: ${error}`);
-        }
+        collector.on('collect', async (i) => {
+          if (i.customId === 'next') {
+            currentPage++;
+            // console.log(nbaEmbeds[currentPage]);
+            await i.update({
+              embeds: [nbaEmbeds[currentPage]],
+              components: [backRow],
+            });
+          }
+          if (i.customId === 'back') {
+            // console.log('back');
+            currentPage--;
+            await i.update({
+              embeds: [nbaEmbeds[currentPage]],
+              components: [nextRow],
+            });
+          }
+        });
       } else {
         const embed = {
           color: 0x0099ff,
