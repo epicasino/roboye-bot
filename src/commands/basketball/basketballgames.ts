@@ -140,6 +140,7 @@ class BasketballGamesCommand implements iCommand {
           });
         } catch (error) {
           console.error(error);
+          await interaction.followUp(`Error: ${error}`);
         }
       } else {
         const embed = {
