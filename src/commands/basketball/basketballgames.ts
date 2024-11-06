@@ -67,7 +67,7 @@ class BasketballGamesCommand implements iCommand {
         .toArray();
       const nbaFields = scheduleRows.map((link) => {
         return {
-          name: link.time + ' ' + '(PST)',
+          name: link.time + ' ' + '(EST)',
           value: `[${link.vs}](${link.link})`,
         };
       });
@@ -181,7 +181,7 @@ class BasketballGamesCommand implements iCommand {
             url: 'https://www.espn.com/nba/standings',
           },
           thumbnail: {
-            url: 'https://methstreams.com/icons/nba.png',
+            url: 'https://content.sportslogos.net/logos/6/982/full/_national_basketball_association_logo_primary_20182722.png',
           },
           fields: [{ name: '\u200B', value: '' }].concat(
             nbaFields.flatMap((obj, index, arr) => {
