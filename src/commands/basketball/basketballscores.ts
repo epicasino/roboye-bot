@@ -176,6 +176,7 @@ async function generateGameTimes() {
   )
     .then((res) => res.json())
     .then((data: iGamesAPI) => {
+      console.log(data);
       return data.data;
     });
 
