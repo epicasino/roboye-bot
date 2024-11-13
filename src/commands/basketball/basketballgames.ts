@@ -67,7 +67,7 @@ class BasketballGamesCommand implements iCommand {
         .toArray();
       const nbaFields = scheduleRows.map((link) => {
         return {
-          name: link.time + ' ' + '(EST)',
+          name: `${link.time} ${link.time !== 'LIVE' ? '(EST)' : '!'}`,
           value: `[${link.vs}](${link.link})`,
         };
       });
