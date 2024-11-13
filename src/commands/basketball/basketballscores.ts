@@ -11,6 +11,7 @@ import { iCommand } from '../../types/types';
 import { iGame, iGamesAPI } from './types/types';
 
 function generateEmbed(game: iGame) {
+  // console.log(game.topPerformers);
   const linkFields = game.gameLinks.map((gameLink) => {
     return {
       name: '\u200B',
@@ -30,6 +31,31 @@ function generateEmbed(game: iGame) {
     };
   });
 
+  const fields =
+    game.awayTeam.teamScore === ''
+      ? [
+          {
+            name: '\u200B',
+            value: `This game has not started yet.`,
+            inline: true,
+          },
+          { name: '\u200B', value: '**TOP PLAYERS**' },
+        ]
+      : [
+          {
+            name: '\u200B',
+            value: `**${game.awayTeam.teamScore}**`,
+            inline: true,
+          },
+          { name: game.time, value: '**-**', inline: true },
+          {
+            name: '\u200B',
+            value: `**${game.homeTeam.teamScore}**`,
+            inline: true,
+          },
+          { name: '\u200B', value: '**TOP PLAYERS**' },
+        ];
+
   return {
     color: 0x0099ff,
     title: `${game.awayTeam.teamName} (${game.awayTeam.teamRecord}) vs. ${game.homeTeam.teamName} (${game.homeTeam.teamRecord})`,
@@ -42,18 +68,7 @@ function generateEmbed(game: iGame) {
         'https://a1.espncdn.com/combiner/i?img=%252Fi%252Fmobile%252Fwebsite%252Fimg%252Fespn_app_72@2x.png&w=60&h=60&scale=crop&cquality=80&location=origin',
       url: `https://www.espn.com/nba/scoreboard`,
     },
-    fields: [
-      {
-        name: '\u200B',
-        value: `**${game.awayTeam.teamScore}**`,
-        inline: true,
-      },
-      { name: game.time, value: '**-**', inline: true },
-      { name: '\u200B', value: `**${game.homeTeam.teamScore}**`, inline: true },
-      { name: '\u200B', value: '**TOP PLAYERS**' },
-    ]
-      .concat(playerFields)
-      .concat(linkFields),
+    fields: fields.concat(playerFields).concat(linkFields),
   };
 }
 
@@ -68,6 +83,8 @@ async function generateGameScores() {
       }).time,
     };
   });
+
+  // console.log(gameScores);
 
   return gameScores;
 }
@@ -164,7 +181,7 @@ async function generateGameInfo() {
       gameLinks,
     };
   });
-  console.log(gamesInfo);
+  // console.log(gamesInfo);
   return gamesInfo;
 }
 
@@ -181,7 +198,7 @@ async function generateGameTimes() {
   )
     .then((res) => res.json())
     .then((data: iGamesAPI) => {
-      console.log(data);
+      // console.log(data);
       return data.data;
     });
 
@@ -203,6 +220,8 @@ class BasketballScoresCommand implements iCommand {
     const gameEmbeds = gameScores.map((game) => {
       return generateEmbed(game);
     });
+
+    // gameEmbeds.forEach((game) => console.log(game.fields));
 
     const nextButton = new ButtonBuilder()
       .setCustomId('next')
