@@ -134,7 +134,7 @@ class BasketballGamesCommand implements iCommand {
             },
           };
         });
-        console.log(nbaEmbeds);
+        // console.log(nbaEmbeds);
         let currentPage = 0;
         const response = await interaction.followUp({
           embeds: [nbaEmbeds[currentPage]],
