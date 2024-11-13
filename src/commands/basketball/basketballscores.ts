@@ -164,6 +164,7 @@ async function generateGameInfo() {
       gameLinks,
     };
   });
+  console.log(gamesInfo);
   return gamesInfo;
 }
 
