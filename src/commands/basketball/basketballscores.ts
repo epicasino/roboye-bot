@@ -73,9 +73,13 @@ async function generateGameScores() {
 }
 
 async function generateGameInfo() {
-  const html = await fetch('https://www.espn.com/nba/scoreboard/').then((res) =>
-    res.text()
-  );
+  let date: string | string[] = new Date()
+    .toLocaleDateString('en-US')
+    .split('/');
+  date = `${date[2]}${date[0]}${date[1]}`;
+  const html = await fetch(
+    `https://www.espn.com/nba/scoreboard/_/date/${date}`
+  ).then((res) => res.text());
   const $ = load(html);
   const gamesHTML = $('.Scoreboard').toArray();
   // console.log(gamesHTML.length);
