@@ -1,0 +1,239 @@
+{
+  "data": [
+    {
+      "id": 15907594,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2nd Qtr",
+      "period": 2,
+      "time": "Half",
+      "postseason": false,
+      "home_team_score": 65,
+      "visitor_team_score": 54,
+      "home_team": {
+        "id": 2,
+        "conference": "East",
+        "division": "Atlantic",
+        "city": "Boston",
+        "name": "Celtics",
+        "full_name": "Boston Celtics",
+        "abbreviation": "BOS"
+      },
+      "visitor_team": {
+        "id": 1,
+        "conference": "East",
+        "division": "Southeast",
+        "city": "Atlanta",
+        "name": "Hawks",
+        "full_name": "Atlanta Hawks",
+        "abbreviation": "ATL"
+      }
+    },
+    {
+      "id": 15907595,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2nd Qtr",
+      "period": 2,
+      "time": "Half",
+      "postseason": false,
+      "home_team_score": 57,
+      "visitor_team_score": 51,
+      "home_team": {
+        "id": 9,
+        "conference": "East",
+        "division": "Central",
+        "city": "Detroit",
+        "name": "Pistons",
+        "full_name": "Detroit Pistons",
+        "abbreviation": "DET"
+      },
+      "visitor_team": {
+        "id": 16,
+        "conference": "East",
+        "division": "Southeast",
+        "city": "Miami",
+        "name": "Heat",
+        "full_name": "Miami Heat",
+        "abbreviation": "MIA"
+      }
+    },
+    {
+      "id": 15907596,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2nd Qtr",
+      "period": 2,
+      "time": "Half",
+      "postseason": false,
+      "home_team_score": 58,
+      "visitor_team_score": 47,
+      "home_team": {
+        "id": 22,
+        "conference": "East",
+        "division": "Southeast",
+        "city": "Orlando",
+        "name": "Magic",
+        "full_name": "Orlando Magic",
+        "abbreviation": "ORL"
+      },
+      "visitor_team": {
+        "id": 4,
+        "conference": "East",
+        "division": "Southeast",
+        "city": "Charlotte",
+        "name": "Hornets",
+        "full_name": "Charlotte Hornets",
+        "abbreviation": "CHA"
+      }
+    },
+    {
+      "id": 15907597,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2nd Qtr",
+      "period": 2,
+      "time": "Q2 7:58",
+      "postseason": false,
+      "home_team_score": 27,
+      "visitor_team_score": 34,
+      "home_team": {
+        "id": 23,
+        "conference": "East",
+        "division": "Atlantic",
+        "city": "Philadelphia",
+        "name": "76ers",
+        "full_name": "Philadelphia 76ers",
+        "abbreviation": "PHI"
+      },
+      "visitor_team": {
+        "id": 20,
+        "conference": "East",
+        "division": "Atlantic",
+        "city": "New York",
+        "name": "Knicks",
+        "full_name": "New York Knicks",
+        "abbreviation": "NYK"
+      }
+    },
+    {
+      "id": 15907598,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2024-11-13T01:00:00Z",
+      "period": 0,
+      "time": null,
+      "postseason": false,
+      "home_team_score": 0,
+      "visitor_team_score": 0,
+      "home_team": {
+        "id": 17,
+        "conference": "East",
+        "division": "Central",
+        "city": "Milwaukee",
+        "name": "Bucks",
+        "full_name": "Milwaukee Bucks",
+        "abbreviation": "MIL"
+      },
+      "visitor_team": {
+        "id": 28,
+        "conference": "East",
+        "division": "Atlantic",
+        "city": "Toronto",
+        "name": "Raptors",
+        "full_name": "Toronto Raptors",
+        "abbreviation": "TOR"
+      }
+    },
+    {
+      "id": 15907599,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2024-11-13T02:00:00Z",
+      "period": 0,
+      "time": null,
+      "postseason": false,
+      "home_team_score": 0,
+      "visitor_team_score": 0,
+      "home_team": {
+        "id": 29,
+        "conference": "West",
+        "division": "Northwest",
+        "city": "Utah",
+        "name": "Jazz",
+        "full_name": "Utah Jazz",
+        "abbreviation": "UTA"
+      },
+      "visitor_team": {
+        "id": 24,
+        "conference": "West",
+        "division": "Pacific",
+        "city": "Phoenix",
+        "name": "Suns",
+        "full_name": "Phoenix Suns",
+        "abbreviation": "PHX"
+      }
+    },
+    {
+      "id": 15907600,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2024-11-13T03:00:00Z",
+      "period": 0,
+      "time": null,
+      "postseason": false,
+      "home_team_score": 0,
+      "visitor_team_score": 0,
+      "home_team": {
+        "id": 10,
+        "conference": "West",
+        "division": "Pacific",
+        "city": "Golden State",
+        "name": "Warriors",
+        "full_name": "Golden State Warriors",
+        "abbreviation": "GSW"
+      },
+      "visitor_team": {
+        "id": 7,
+        "conference": "West",
+        "division": "Southwest",
+        "city": "Dallas",
+        "name": "Mavericks",
+        "full_name": "Dallas Mavericks",
+        "abbreviation": "DAL"
+      }
+    },
+    {
+      "id": 15907601,
+      "date": "2024-11-12",
+      "season": 2024,
+      "status": "2024-11-13T03:00:00Z",
+      "period": 0,
+      "time": null,
+      "postseason": false,
+      "home_team_score": 0,
+      "visitor_team_score": 0,
+      "home_team": {
+        "id": 25,
+        "conference": "West",
+        "division": "Northwest",
+        "city": "Portland",
+        "name": "Trail Blazers",
+        "full_name": "Portland Trail Blazers",
+        "abbreviation": "POR"
+      },
+      "visitor_team": {
+        "id": 18,
+        "conference": "West",
+        "division": "Northwest",
+        "city": "Minnesota",
+        "name": "Timberwolves",
+        "full_name": "Minnesota Timberwolves",
+        "abbreviation": "MIN"
+      }
+    }
+  ],
+  "meta": {
+    "per_page": 25
+  }
+}
