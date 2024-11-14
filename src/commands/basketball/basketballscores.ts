@@ -63,7 +63,10 @@ function generateEmbed(game: iGame) {
       return link.linkName === 'Gamecast';
     }).link,
     author: {
-      name: `Current Games & Scores on ${new Date().toLocaleDateString()}`,
+      name: `Current Games & Scores on ${new Date().toLocaleDateString(
+        'en-US',
+        { timeZone: 'America/Los_Angeles' }
+      )}`,
       icon_url:
         'https://a1.espncdn.com/combiner/i?img=%252Fi%252Fmobile%252Fwebsite%252Fimg%252Fespn_app_72@2x.png&w=60&h=60&scale=crop&cquality=80&location=origin',
       url: `https://www.espn.com/nba/scoreboard`,
@@ -91,7 +94,7 @@ async function generateGameScores() {
 
 async function generateGameInfo() {
   let date: string | string[] = new Date()
-    .toLocaleDateString('en-US')
+    .toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })
     .split('/');
   date = `${date[2]}${date[0]}${date[1]}`;
   const html = await fetch(
@@ -188,7 +191,9 @@ async function generateGameInfo() {
 async function generateGameTimes() {
   // THERES GOTTA BE A BETTER WAY
   let date: string | string[] = new Date()
-    .toLocaleDateString('en-US')
+    .toLocaleDateString('en-US', {
+      timeZone: 'America/Los_Angeles',
+    })
     .split('/');
   date = `${date[2]}-${date[0]}-${date[1]}`;
   // console.log(date);
@@ -221,7 +226,7 @@ class BasketballScoresCommand implements iCommand {
       return generateEmbed(game);
     });
 
-    // gameEmbeds.forEach((game) => console.log(game.fields));
+    gameEmbeds.forEach((game) => console.log(game.fields));
 
     const nextButton = new ButtonBuilder()
       .setCustomId('next')
